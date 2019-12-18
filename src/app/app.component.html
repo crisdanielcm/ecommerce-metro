@@ -1,15 +1,15 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<app-header></app-header>
 
-<h1>Ecommerce</h1>
-<ul>
-  <li>Nombre: {{ nombre }}</li>
-  <li>Titulo: {{ title }}</li>
-  <li>Apellido!: {{ apellido }}</li>
-</ul>
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-3">
+            <app-categorias></app-categorias>
+        </div>
+        <div class="col-md-9 pt-1">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<div class="pt-5">
+    <app-footer></app-footer>
+</div>

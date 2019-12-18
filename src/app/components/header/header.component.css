@@ -1,0 +1,10 @@
+a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #DF0209;
+}
+
+.btn-outline-my {
+    color: #DF0209!important;
+    border-color: #DF0209!important;
+}

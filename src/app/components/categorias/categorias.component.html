@@ -1,0 +1,35 @@
+<nav class="d-none d-md-block bg-transparent sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link text-center menu-title">
+                            Categorias
+                        </a>
+            </li>
+            <h5 class="nav-item  line-bottom" *ngFor="let categoria of categorias.categories">
+                <a class="nav-link between-text collapsed text-truncate" href="#submenu{{categoria.id}}" data-toggle="collapse" data-target="#submenu{{categoria.id}}">
+                    <span class="categoria-text">{{ categoria.name }}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                <polyline points="0.375,0.375 45.63,38.087 0.375,75.8 "/>
+                              </svg>
+                </a>
+                <div class="collapse" id="submenu{{categoria.id}}" aria-expanded="false">
+                    <ul class="flex-column pl-2 nav">
+                        <h6 class="nav-item dropright" *ngFor="let subcategoria of categoria.sublevels">
+                            <a class="nav-link pl-3 dropdown-toggle dropdown-item" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [routerLink]="[categoria.name, subcategoria.name, subcategoria.id]">
+                                <i class="fa fa-fw fa-clock-o"></i> <span class="text-sub">{{ subcategoria.name }}</span>
+                            </a>
+                            <div *ngIf=" subcategoria.hasOwnProperty('sublevels') == true" class="dropdown-menu">
+                                <h6 class="animated fadeIn fast " *ngFor="let subsubcategoria of subcategoria.sublevels">
+                                    <a class="nav-link dropdown-item " [routerLink]="[categoria.name, subcategoria.name,subsubcategoria.name, subsubcategoria.id]">
+                                        <span class="text-subsub ">{{ subsubcategoria.name }}</span>
+                                    </a>
+                                </h6>
+                            </div>
+                        </h6>
+                    </ul>
+                </div>
+            </h5>
+        </ul>
+    </div>
+</nav>

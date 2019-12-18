@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="animated fadeIn fast">{{ titulo }}</h3>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 animated fadeIn" *ngFor="let producto of seleciconados">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="../../../assets/img/producto.jpg" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.name }}</h5>
+                        <h6 class="card-text">Precio: <span class="price-color">{{ producto.price }}</span></h6>
+                        <h6 class="card-text">Cantidad: <span>{{ producto.quantity }}</span></h6>
+                        <h6 *ngIf="producto.available == 'Si'" class="card-text">Disponible: <span style="color: #15ce1c;">{{ producto.available }}</span></h6>
+                        <h6 *ngIf="producto.available == 'No'" class="card-text">Disponible: <span class="price-color">{{ producto.available }}</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
