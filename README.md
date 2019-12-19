@@ -1,6 +1,16 @@
 # EcommerceMetro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+Este proyecto ha sido generado con [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+
+1. Es necesario realizar la descarga e instalacion de Node JS mediante el enlace https://nodejs.org/es/ en la version actual.
+    - Mediante la terminal se puede verificar la version instalada mediante el comando `node -v`
+    - Tambien se puede confirmar la version del modulo npm necesario para la instalacion de paquetes mediante el comando `npm -v`.
+
+2. Se recomienda usar el navegador google chrome.
+
+3. Se debe realizar la instalacion del angular CLI abriendo la consola como administrador, si es usuario windows mediante el comando: `npm install -g  @angular/cli` y para usuarios de OSX o linux `sudo npm install -g  @angular/cli`.
+
+    - Se puede confirmar la version con el comando `ng v`
 
 ## Development server
 
