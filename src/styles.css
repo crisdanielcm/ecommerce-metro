@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+
+footer {
+    color: white;
+    background-color: #DF0209;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.container-fluid {
+    padding-right: 5%!important;
+    padding-left: 5%!important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a:active {
+    background-color: #e9ecef!important;
+}
+
+.vertica-center {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    outline: 0;
+    box-shadow: none!important;
+}
+
+.border-title {
+    border: solid 1px #DF0209;
+}
+
+.border-medium {
+    border-top: solid 1px #DF0209;
+    border-bottom: solid 1px #DF0209;
+}
+
+.border-lateral {
+    border-left: solid 1px #DF0209;
+    border-right: solid 1px #DF0209;
+}
+
+
+/* Animaciones  */
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}

@@ -1,0 +1,41 @@
+<div class="row pl-3 pr-3 pb-3">
+    <div class="col-md-7 border-title p-2 vertica-center">
+        <h4 class="animated fadeIn fast" style="margin: 0;">{{ titulo }}</h4>
+    </div>
+    <div class="col-md-5 border-title p-2 vertica-center">
+        <span class="animated fadeIn fast mr-2" style="margin: 0; font-weight: bold;">Ordenar por: </span>
+        <div class="dropdown">
+            <div class="animated fadeIn fast form-group m-0">
+                <select class="animated fadeIn fast form-control" style="border: none;" id="exampleFormControlSelect1" (change)="ordenarProductos($event.target.value)">
+                        <option><a></a></option>
+                        <option value="1"><a>Mayor Precio</a></option>
+                        <option value="2"><a>Menor Precio</a></option>
+                        <option value="3"><a>Mayor Cantidad</a></option>
+                        <option value="4"><a>Menor Cantidad</a></option>
+                        <option value="5"><a>Disponibilidad</a></option>
+                        
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 animated fadeIn" *ngFor="let producto of seleciconados">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="../../../assets/img/producto.jpg" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.name }}</h5>
+                        <h6 class="card-text">Precio: <span class="price-color">{{ producto.price }}</span></h6>
+                        <h6 class="card-text">Cantidad: <span>{{ producto.quantity }}</span></h6>
+                        <h6 *ngIf="producto.available == 'Si'" class="card-text">Disponible: <span style="color: #15ce1c;">{{ producto.available }}</span></h6>
+                        <h6 *ngIf="producto.available == 'No'" class="card-text">Disponible: <span class="price-color">{{ producto.available }}</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

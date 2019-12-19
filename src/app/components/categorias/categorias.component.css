@@ -1,0 +1,65 @@
+.menu-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+li>a.menu-title {
+    border-bottom: 2px solid #DF0209;
+    padding-bottom: 6px;
+    margin-bottom: 5%;
+}
+
+.between-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    font-weight: 100;
+}
+
+a.between-text:hover {
+    color: #DF0209;
+}
+
+.line-bottom {
+    border-bottom: 1px solid #101010;
+}
+
+.text-h5 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    font-weight: 100;
+}
+
+.text-h5:hover {
+    color: black;
+}
+
+.text-sub {
+    display: contents;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    font-weight: 100;
+    width: 100%;
+}
+
+.text-sub:hover {
+    color: black;
+}
+
+.text-subsub {
+    display: contents;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+    font-weight: 100;
+    font-size: 0.9rem;
+}
+
+.dropdown-menu.show {
+    width: 70%;
+    border-radius: 0;
+}
