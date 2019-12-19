@@ -27,6 +27,32 @@ a:active {
     background-color: #e9ecef!important;
 }
 
+.vertica-center {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    outline: 0;
+    box-shadow: none!important;
+}
+
+.border-title {
+    border: solid 1px #DF0209;
+}
+
+.border-medium {
+    border-top: solid 1px #DF0209;
+    border-bottom: solid 1px #DF0209;
+}
+
+.border-lateral {
+    border-left: solid 1px #DF0209;
+    border-right: solid 1px #DF0209;
+}
+
 
 /* Animaciones  */
 

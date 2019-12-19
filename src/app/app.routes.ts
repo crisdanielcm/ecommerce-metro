@@ -4,11 +4,11 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductosComponent } from './components/productos/productos.component';
 
 
-
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: ':categoria/:subcategoria/:id', component: ProductosComponent, runGuardsAndResolvers: 'paramsOrQueryParamsChange'},
-    { path: ':categoria/:subcategoria/:subsubcategoria/:id', component: ProductosComponent, runGuardsAndResolvers: 'always' },
+    { path: ':categoria/:subcategoria/:id', component: ProductosComponent },
+    { path: ':categoria/:subcategoria/:subsubcategoria/:id', component: ProductosComponent },
+    { path: ':disponibilidad/:preciomenor/:preciomayor/:cantidadmenor/:cantidadmayor/:id', component: ProductosComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 

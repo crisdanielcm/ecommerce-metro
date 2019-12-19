@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoriaService } from '../../services/categorias.service';
+import { ActivatedRoute } from '@angular/router';
+
 import * as $ from 'jquery';
 
 @Component({
@@ -10,10 +12,8 @@ import * as $ from 'jquery';
 export class CategoriasComponent implements OnInit {
 
   categorias: any = [];
-
   // tslint:disable-next-line: variable-name
-  constructor( private _categoriaService: CategoriaService ) {
-
+  constructor( private _categoriaService: CategoriaService, private route: ActivatedRoute ) {
   }
 
   ngOnInit() {

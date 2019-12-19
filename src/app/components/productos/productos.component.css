@@ -1,3 +1,8 @@
 .price-color {
     color: #DF0209;
 }
+
+.dropdown {
+    max-width: 50%;
+    width: 50%;
+}
