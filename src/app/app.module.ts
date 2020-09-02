@@ -17,18 +17,16 @@ import { HomeComponent } from './components/home/home.component';
 //Rutas
 
 import { AppRoutingModule } from './app.routes';
-import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // HeaderComponent,
-    // FooterComponent,
-    // CategoriasComponent,
-    // ProductosComponent,
-    // HomeComponent,
-    ComponentsModule
+    HeaderComponent,
+    FooterComponent,
+    CategoriasComponent,
+    ProductosComponent,
+    HomeComponent
 
   ],
   imports: [
@@ -37,8 +35,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserAnimationsModule,
     MatMenuModule,
     FormsModule,
-    AppRoutingModule,
-    ComponentsModule
+    AppRoutingModule
   ],
   providers: [
     CategoriaService,
