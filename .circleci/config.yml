@@ -56,4 +56,4 @@ jobs:
             - run:
                 name: Running unit tests
                 command: |
-                  sudo ng test
+                  sudo npm test
