@@ -1,12 +1,34 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { HomeComponent } from './components/home/home.component';
+import { AppRoutingModule } from './app.routes';
+import { CategoriaService } from './services/categorias.service';
+import { ProductosService } from './services/productos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        CategoriasComponent,
+        ProductosComponent,
+        HomeComponent
       ],
+      imports: [
+        AppRoutingModule,
+        HttpClientModule,
+      ],
+      providers: [
+        CategoriaService,
+        ProductosService
+      ]
     }).compileComponents();
   }));
 
@@ -26,6 +48,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ecommerce-metro app is running!');
+    expect(compiled.querySelector('.container').textContent).toContain('2020 Ecommerce Metro');
   });
 });
