@@ -45,12 +45,6 @@ workflows:
             - unit_test:
                 requires:
                     - build
-            - bundle_size:
-                requires:
-                    - build
-            - end_to_end:
-                requires:
-                    - build
 jobs:
     build:
         <<: *docker_defaults
@@ -62,22 +56,4 @@ jobs:
             - run:
                 name: Running unit tests
                 command: |
-                  sudo npm test
-                  sudo npm run coveralls
-    bundle_size:
-        <<: *docker_defaults
-        steps:
-            - *attach_workspace
-            - run:
-                name: Checking bundle size
-                command: |
-                  sudo npm run build
-                  sudo npm run bundlesize
-    end_to_end:
-        <<: *docker_defaults
-        steps:
-            - *attach_workspace
-            - run:
-                name: Running E2E tests
-                command: |
-                  sudo npm run e2e
+                  sudo ng test
