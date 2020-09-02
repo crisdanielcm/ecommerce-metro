@@ -1,83 +1,116 @@
 version: 2.1
 
-docker_defaults: &docker_defaults
+description: |
+  Build and publish Ionic/Angular libraries.
+  Repository: https://github.com/okode/orbs
+
+orbs:
+  common: okode/common@volatile
+
+executors:
+  node:
     docker:
-        - image: circleci/node:12.16.2-browsers
-    working_directory: ~/project/repo
+      - image: circleci/node
+  browsers:
+    docker:
+      - image: circleci/node:12.16.2-browsers
 
-attach_workspace: &attach_workspace
-    attach_workspace:
-        at: ~/project
-
-install_steps: &install_steps
-    steps:
-        - checkout
-        - restore_cache:
-            name: Restore node_modules cache
-            keys:
-                - dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
-                - dependency-cache-{{ .Branch }}-
-                - dependency-cache-
-        - run:
-            name: Installing Dependencies
-            command: |
-                if [ ! -d "./node_modules" ]; then
-                    echo ">>> Installing Node packages using NPM"
-                    npm install --silent
-                else
-                    echo ">>> Using cached 'node_modules'"
-                fi
-        - save_cache:
-            name: Save node_modules cache
-            key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
-            paths:
-                - node_modules/
-        - persist_to_workspace:
-            root: ~/project
-            paths:
-                - repo
-
-workflows:
-    version: 2
-    build_pipeline:
-        jobs:
-            - build
-            - unit_test:
-                requires:
-                    - build
-            - bundle_size:
-                requires:
-                    - build
-            - end_to_end:
-                requires:
-                    - build
 jobs:
-    build:
-        <<: *docker_defaults
-        <<: *install_steps
-    unit_test:
-        <<: *docker_defaults
-        steps:
-            - *attach_workspace
+  test:
+    parameters:
+      project:
+        type: string
+      skip-tests:
+        type: boolean
+        default: false
+      skip-e2e:
+        type: boolean
+        default: false
+
+    executor: browsers
+    steps:
+      - checkout
+      - common/npm-install
+      - run:
+          name: Building
+          command: npm run build -- << parameters.project >>
+      - unless:
+          condition: << parameters.skip-tests >>
+          steps:
+            - common/chrome-upgrade
             - run:
                 name: Running unit tests
-                command: |
-                  sudo npm test
-                  sudo npm run coveralls
-    bundle_size:
-        <<: *docker_defaults
-        steps:
-            - *attach_workspace
-            - run:
-                name: Checking bundle size
-                command: |
-                  sudo npm run build
-                  sudo npm run bundlesize
-    end_to_end:
-        <<: *docker_defaults
-        steps:
-            - *attach_workspace
-            - run:
-                name: Running E2E tests
-                command: |
-                  sudo npm run e2e
+                command: npm run test -- << parameters.project >> --watch false --progress false
+            - unless:
+                condition: << parameters.skip-e2e >>
+                steps:
+                  - run:
+                      name: Running e2e tests
+                      command: npm run e2e
+            - store_test_results:
+                path: test-results
+  build:
+    parameters:
+      project:
+        type: string
+    executor: node
+    steps:
+      - checkout
+      - common/npm-install
+      - run:
+          name: Building
+          command: npm run build -- << parameters.project >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+  publish-npm:
+    parameters:
+      path:
+        type: string
+      access:
+        type: string
+        default: public
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Installing NPM CLI Login
+          command: sudo npm install -g npm-cli-adduser
+      - run:
+          name: Authenticating NPM
+          command: npm-cli-adduser
+      - run:
+          name: Publishing NPM package
+          command: cd << parameters.path >> && npm publish --access=<< parameters.access >>
+  publish-bitbucket:
+    parameters:
+      path:
+        type: string
+      repo:
+        type: string
+      ssh-permission-fingerprint:
+        type: string
+        default: ''
+    executor: node
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "<< parameters.ssh-permission-fingerprint >>"
+      - attach_workspace:
+          at: .
+      - run:
+          name: Publish NPM package at Bitbcuket
+          command: |
+            mkdir -p ~/.ssh/ && echo -e "Host bitbucket.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+            git config --global user.email "dummy@mail.com"
+            git config --global user.name "$CIRCLE_USERNAME"
+            git clone --quiet git@bitbucket.org:<< parameters.repo >>-dist.git npmdist
+            cd npmdist
+            rm -rf *
+            cp -R ../<< parameters.path >>/* .
+            git add --all
+            git commit -m "Bumped version $CIRCLE_TAG"
+            git tag $CIRCLE_TAG
+            git push && git push --tags
